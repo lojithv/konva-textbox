@@ -33,6 +33,8 @@
         x: 70,
         y: 100,
         fontSize: 16 ,
+        fill: '#FF0000',
+        padding: 5,
         draggable: true,
         width: 160,
         height: 30,
@@ -43,10 +45,11 @@
       var tr = new Konva.Transformer({
         node: textNode,
         keepRatio: false,
-        enabledAnchors: ['middle-left', 'middle-right', 'top-left', 'top-right', 'bottom-left', 'bottom-right'],
+        enabledAnchors: ['middle-left', 'middle-right', 'top-left', 'top-right', 'top-center', 'bottom-left', 'bottom-right', 'bottom-center'],
         // set minimum width of text
         boundBoxFunc: function (oldBox, newBox) {
-          newBox.width = Math.max(30, newBox.width);
+          newBox.width = Math.max(40, newBox.width);
+          newBox.height = Math.max(20, newBox.height);
           return newBox;
         },
       });
@@ -65,8 +68,8 @@
 
       textNode.on('dblclick dbltap', () => {
         // hide text node and transformer:
-        textNode.hide();
-        tr.hide();
+        textNode.show();
+        tr.show();
 
         // create textarea over canvas with absolute position
         // first we need to find position for textarea
@@ -97,10 +100,10 @@
           textNode.height() - textNode.padding() * 2 + 5 + 'px';
         textarea.style.fontSize = textNode.fontSize() + 'px';
         textarea.style.border = 'none';
-        textarea.style.padding = '0px';
+        textarea.style.padding = '5px';
         textarea.style.margin = '0px';
         textarea.style.overflow = 'hidden';
-        textarea.style.background = 'none';
+        textarea.style.background = '#FFF0CC';
         textarea.style.outline = 'none';
         textarea.style.resize = 'none';
         textarea.style.lineHeight = textNode.lineHeight();
@@ -137,7 +140,7 @@
           textarea.parentNode.removeChild(textarea);
           window.removeEventListener('click', handleOutsideClick);
           textNode.show();
-          tr.show();
+          tr.hide();
           tr.forceUpdate();
         }
 
