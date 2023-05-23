@@ -37,13 +37,25 @@
         padding: 5,
         draggable: true,
         width: 160,
-        height: 30,
+        height: 40,
       });
+
+      var rect = new Konva.Rect({
+        x: 70,
+        y: 100,
+        width: textNode.width(),
+        height: textNode.height(),
+        fill: '#FFF753',
+        draggable: true,
+        opacity: 0.5,
+      });
+
+      layer.add(rect);
 
       layer.add(textNode);
 
       var tr = new Konva.Transformer({
-        node: textNode,
+        nodes: [textNode,rect],
         keepRatio: false,
         enabledAnchors: ['middle-left', 'middle-right', 'top-left', 'top-right', 'top-center', 'bottom-left', 'bottom-right', 'bottom-center'],
         // set minimum width of text
@@ -68,7 +80,7 @@
 
       textNode.on('dblclick dbltap', () => {
         // hide text node and transformer:
-        textNode.show();
+        textNode.hide();
         tr.show();
 
         // create textarea over canvas with absolute position
@@ -103,7 +115,7 @@
         textarea.style.padding = '5px';
         textarea.style.margin = '0px';
         textarea.style.overflow = 'hidden';
-        textarea.style.background = '#FFF0CC';
+        textarea.style.background = 'none';
         textarea.style.outline = 'none';
         textarea.style.resize = 'none';
         textarea.style.lineHeight = textNode.lineHeight();
@@ -131,6 +143,7 @@
 
         // reset height
         textarea.style.height = 'auto';
+        //textarea.style.width = 'auto';
         // after browsers resized it we can set actual value
         textarea.style.height = textarea.scrollHeight + 3 + 'px';
 
@@ -186,6 +199,12 @@
           textarea.style.height = 'auto';
           textarea.style.height =
             textarea.scrollHeight + textNode.fontSize() + 'px';
+        //   textNode.setAttrs({
+        //   width: textarea.width,
+        //   height: textarea.height,
+        //   scaleX: 1,
+        //   scaleY: 1,
+        // });
         });
 
         function handleOutsideClick(e) {
