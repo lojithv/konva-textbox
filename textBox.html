@@ -34,7 +34,7 @@
         y: 100,
         fontSize: 16 ,
         fill: '#FF0000',
-        padding: 5,
+        padding: 7,
         draggable: true,
         width: 160,
         height: 40,
@@ -57,6 +57,11 @@
       var tr = new Konva.Transformer({
         nodes: [textNode,rect],
         keepRatio: false,
+        rotateEnabled: false,
+        borderStroke: '#BEBDBA',
+        anchorSize: 6,
+        anchorStroke: '#83817E',
+        anchorCornerRadius: 50,
         enabledAnchors: ['middle-left', 'middle-right', 'top-left', 'top-right', 'top-center', 'bottom-left', 'bottom-right', 'bottom-center'],
         // set minimum width of text
         boundBoxFunc: function (oldBox, newBox) {
@@ -112,7 +117,7 @@
           textNode.height() - textNode.padding() * 2 + 5 + 'px';
         textarea.style.fontSize = textNode.fontSize() + 'px';
         textarea.style.border = 'none';
-        textarea.style.padding = '5px';
+        textarea.style.padding = '7px';
         textarea.style.margin = '0px';
         textarea.style.overflow = 'hidden';
         textarea.style.background = 'none';
