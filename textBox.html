@@ -19,7 +19,6 @@
   <script>
     var width = window.innerWidth;
     var height = window.innerHeight;
-
     var stage = new Konva.Stage({
       container: 'container',
       width: width,
@@ -56,7 +55,7 @@
     layer.add(textNode);
 
     var tr = new Konva.Transformer({
-        nodes: [textNode,rect],
+        nodes: [textNode, rect],
         keepRatio: false,
         rotateEnabled: false,
         borderStroke: '#7E7A76',
@@ -72,15 +71,16 @@
     });
 
     textNode.on('transform', function () {
+      console.log("tranform change")
       // reset scale, so only with is changing by transformer
       textNode.setAttrs({
         width: textNode.width() * textNode.scaleX(),
         scaleX: 1,
       });
-      rect.setAttrs({
-        width: textNode.width() * textNode.scaleX(),
+      rect.setAttrs({ width: textNode.width() , height: textNode.height(),
         scaleX: 1,
-      });
+      })
+      ;
     });
 
     layer.add(tr);
@@ -207,7 +207,7 @@
         textNode.text(textarea.value);
         textarea.style.height = 'auto';
         textarea.style.height =
-          textarea.scrollHeight + textNode.fontSize() + 'px';
+        textarea.scrollHeight + textNode.fontSize() + 'px';
         rect.setAttrs({ width: textNode.width() - textNode.padding() * 2, height: textNode.height() - textNode.padding() * 2 + 5 })
       });
 
@@ -215,6 +215,8 @@
         if (e.target !== textarea) {
           textNode.text(textarea.value);
           removeTextarea();
+          // setTimeout(() => {
+          // tr.hide();} ,500);
         }
       }
       setTimeout(() => {
